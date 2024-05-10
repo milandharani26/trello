@@ -10,9 +10,10 @@ const ColorButton = styled(Button)(({ theme }) => ({
     }
 }));
 
-export default function ButtonFiled({ children, bgColor, color, hoverbg,  variant, border}) {
+export default function ButtonFiled({ children, bgColor, color, hoverbg,  variant, border, handleOnClick}) {
     return (
         <ColorButton
+           onClick={handleOnClick}
             variant={variant}
             fullWidth={true}
             sx={{
