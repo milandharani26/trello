@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createUniqueID } from "../../utils/halper";
 
 const initialState = {
     users:[],
@@ -25,6 +26,7 @@ const userSlice = createSlice({
 
             reducer(state, action){
                 const userID = action.payload.userID
+                // const userID = createUniqueID()
                 const email = action.payload.email
                 const password = action.payload.password
 
@@ -33,21 +35,30 @@ const userSlice = createSlice({
         },
 
         loginUser(state, action){
-
-            console.log(state, action, "from  login reducer");
-
             const foundUser = state.users.find(user => user.userID === action.payload);
                 if (foundUser) {
                     foundUser.isloggedIn = true;
                     state.currentUser = foundUser;
                 }
+
+                // state.users = [...state.users, ]
+        },
+
+        logoutUser(state, action){
+            const foundUser = state.users.find(user => user.userID === action.payload);
+            if (foundUser) {
+                foundUser.isloggedIn = false;
+                state.currentUser = "";
+            }
         }
+
+        
 
 }});
 
 
 
 
-export const { registerUser,loginUser } = userSlice.actions;
+export const { registerUser,loginUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

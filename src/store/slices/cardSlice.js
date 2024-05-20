@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { createUniqueID } from "../../utils/halper"
 
 const initialState = {
-    cards:[]
+    cards:[],
+    currntcardId:""
 
     // boardID, 
     // cardID, 
@@ -17,14 +19,15 @@ const cardSlice = createSlice({
     reducers:{
 
         createCard:{
-            prepare(boardID, cardID, cardTitle){
+            prepare(boardID, cardTitle){
                 return{
-                    payload:{boardID, cardID, cardTitle}
+                    payload:{boardID, cardTitle}
                 }
             },
             reducer(state, action){
                 const boardID = action.payload.boardID
-                const cardID = action.payload.cardID
+                // const cardID = action.payload.cardID
+                const cardID = createUniqueID()
                 const cardTitle = action.payload.cardTitle
 
                 state.cards = [...state.cards , {boardID, cardID, cardTitle}]

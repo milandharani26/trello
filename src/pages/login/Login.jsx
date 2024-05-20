@@ -1,6 +1,6 @@
 import "./login.scss";
 import rightImage from "../../assets/trello-right.3ee60d6f.svg";
-import leftimage from "../../assets/trello-left.4f52d13c.svg";
+import leftImage from "../../assets/trello-left.4f52d13c.svg";
 import trelloLogo from "../../assets/ffb8cab4-13a7-4d31-b94d-129623f36e4c.svg";
 import googleIcon from "../../assets/google-logo.5867462c.svg"
 import Input from "../../components/Input";
@@ -8,21 +8,23 @@ import PaperComponent from "../../components/Paper";
 import ButtonFiled from "../../components/Button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/slices/userSlice";
 
 function Login() {
 
-    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     
     const dispatch = useDispatch();
 
+    const {users} = useSelector((store)=>store.user)
+    console.log(users, "uswerdara")
+
     return (
         <div className="login-container">
             <div className="image-left">
-                <img src={leftimage} alt="image right" />
+                <img src={leftImage} alt="image right" />
             </div>
 
             <PaperComponent>
@@ -36,12 +38,12 @@ function Login() {
                         <Input placeholder={"Enter your Email"} value={email} onchangeHandler={setEmail}/>
                         <Input placeholder={"Enter Password"}  value={password} onchangeHandler={setPassword}/>
                         <ButtonFiled 
-                        bgColor={"#0052CC"} 
-                        color={"#fff"} 
-                        variant={"contained"} 
-                        handleOnClick={()=>dispatch(loginUser(3))}
+                        bgColor={"#0052CC"}
+                        color={"#fff"}
+                        variant={"contained"}
+                        handleOnClick={()=>dispatch(loginUser("dddba020"))} 
                         >
-                            <Link to="/dashboard">continue</Link>
+                            <Link to={`/${"dddba020"}/dashboard`} style={{textDecoration:"none", color:"#fff"}}>continue</Link>
                         </ButtonFiled>
                     </div>
 

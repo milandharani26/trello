@@ -7,15 +7,27 @@ import Input from "../../components/Input";
 import PaperComponent from "../../components/Paper";
 import ButtonFiled from "../../components/Button";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/slices/userSlice";
+import { createUniqueID } from "../../utils/halper";
 
 function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+
+    function handleContinue(){
+        console.log("hello")
+
+        const userID = createUniqueID()
+
+        dispatch(registerUser(userID, email, password))
+        navigate(`/${userID}/dashboard`);
+    }
 
     return (
         <div className="login-container">
@@ -37,9 +49,10 @@ function Signup() {
                         bgColor={"#0052CC"} 
                         color={"#fff"} 
                         variant={"contained"} 
-                        handleOnClick={()=>dispatch(registerUser(4, email, password))}
+                        handleOnClick={()=>handleContinue()}
                         >
-                            <Link to="/dashboard">continue</Link>
+                            continue
+                            {/* <Link to="/dashboard">continue</Link> */}
                         </ButtonFiled>
                     </div>
 

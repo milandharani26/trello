@@ -1,9 +1,10 @@
-import { StarSharp } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
+import { createUniqueID } from "../../utils/halper";
 
 
 const initialState = {
-    lists:[]
+    lists:[],
+    currentList:"",
 
     // cardId,
     // listID
@@ -19,15 +20,16 @@ const listsSlice = createSlice({
     reducers:{
 
         createList :{
-            prepare(cardID, listID, title, description){
+            prepare(cardID, title, description){
                 return{
-                    payload:{cardID, listID, title, description}
+                    payload:{cardID, title, description}
                 }
             },
 
             reducer(state, action){
                 const cardID = action.payload.cardID
-                const listID = action.payload.listID
+                // const listID = action.payload.listID
+                const listID = createUniqueID()
                 const title = action.payload.title
                 const description = action.payload.description
 
@@ -40,4 +42,4 @@ const listsSlice = createSlice({
 
 export const { createList } = listsSlice.actions;
 
-export default createList.reducer
+export default listsSlice.reducer

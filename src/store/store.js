@@ -12,16 +12,16 @@ const persistConfig = {
     storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+// const persistedReducer = persistReducer(persistConfig, userReducer);
 
-// const rootReducer = combineReducers({
-//     user:userReducer,
-//     board:boardReducer,
-//     card:cardReducer,
-//     list:cardReducer
-//   });
+const rootReducer = combineReducers({
+    user:userReducer,
+    board:boardReducer,
+    card:cardReducer,
+    list:listReducer
+  });
 
-//   const persistedReducer = persistReducer(persistConfig, rootReducer);
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,

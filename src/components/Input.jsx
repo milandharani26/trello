@@ -3,12 +3,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
-const InputField = styled(TextField)(({ theme }) => ({
-
-    '&:focus': {
-        borderColor: 'blue', // Change border color on focus
-    },
-}))
+// const InputField = styled(TextField)(({ theme }) => ({
+//     '&:focus': {
+//         borderColor: 'blue', // Change border color on focus
+//     },
+// }))
 
 
 export default function Input({ placeholder, value, onchangeHandler}) {

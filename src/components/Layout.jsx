@@ -19,12 +19,18 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import trelloLogo from "../assets/navLogo.svg";
 import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../store/slices/userSlice';
+
 
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
+        "& > div:first-child": {
+            backgroundColor: '#fff'
+        },
         padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
@@ -62,7 +68,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     backgroundColor: "#172B4D",
-    boxShadow:"none",
+    boxShadow: "none",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -72,6 +78,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Layout() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+
+    const dispatch = useDispatch();
+    const currentUserId = useSelector((store)=>store.user.currentUser.userID)
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -94,6 +103,7 @@ export default function Layout() {
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
                         <MenuIcon />
+                        <button onClick={()=>dispatch(logoutUser(currentUserId))}>Logout</button>
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -110,13 +120,14 @@ export default function Layout() {
                 anchor="left"
                 open={open}
             >
-                <DrawerHeader sx={{ "& .MuiButtonBase-root.MuiIconButton-root": {
+                <DrawerHeader sx={{
+                    "& .MuiButtonBase-root.MuiIconButton-root": {
                         display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%"
                     }
                 }}>
                     <IconButton onClick={handleDrawerClose}>
                         <img src={trelloLogo} alt="logo" />
-                        <>{theme.direction === 'ltr' ? <div style={{color:"white"}}><ChevronLeftIcon /></div> : <ChevronRightIcon />}</>
+                        <>{theme.direction === 'ltr' ? <div style={{ color: "white" }}><ChevronLeftIcon /></div> : <ChevronRightIcon />}</>
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
@@ -136,8 +147,8 @@ export default function Layout() {
             </Drawer>
             <Main open={open}>
 
-            <DrawerHeader/>
-                <Outlet/>
+                <DrawerHeader />
+                <Outlet />
 
 
                 {/* <DrawerHeader /> */}
