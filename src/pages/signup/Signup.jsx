@@ -7,11 +7,27 @@ import Input from "../../components/Input";
 import PaperComponent from "../../components/Paper";
 import ButtonFiled from "../../components/Button";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../store/slices/userSlice";
+import { createUniqueID } from "../../utils/halper";
 
 function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+
+    function handleContinue(){
+        console.log("hello")
+
+        const userID = createUniqueID()
+
+        dispatch(registerUser(userID, email, password))
+        navigate(`/${userID}/dashboard`);
+    }
 
     return (
         <div className="login-container">
@@ -29,7 +45,15 @@ function Signup() {
                     <div className="login-input">
                         <Input placeholder={"Enter your Email"} value={email} onchangeHandler={setEmail} />
                         <Input placeholder={"Enter Password"} value={password} onchangeHandler={setPassword} />
-                        <ButtonFiled bgColor={"#0052CC"} color={"#fff"} variant={"contained"} >continue</ButtonFiled>
+                        <ButtonFiled 
+                        bgColor={"#0052CC"} 
+                        color={"#fff"} 
+                        variant={"contained"} 
+                        handleOnClick={()=>handleContinue()}
+                        >
+                            continue
+                            {/* <Link to="/dashboard">continue</Link> */}
+                        </ButtonFiled>
                     </div>
 
                     <div className="login-withAuth">
@@ -40,7 +64,7 @@ function Signup() {
                         </ButtonFiled>
 
                         <p>back to login {" "}
-                            <a href="">Login</a>
+                            <Link to="/login">Login</Link>
                         </p>
                     </div>
                 </div>

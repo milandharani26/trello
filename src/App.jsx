@@ -1,15 +1,12 @@
-import { Password } from "@mui/icons-material"
-import Login from "./pages/login/Login"
-import Signup from "./pages/signup/Signup"
-import Layout from "./components/Layout"
+import { RouterProvider } from "react-router-dom"
+
+import router from "./routes/routes"
 
 function App() {
 
   return (
     <>
-      {/* <Login /> */}
-      {/* <Signup /> */}
-      <Layout/>
+      <RouterProvider router={router} />
     </>
   )
 }

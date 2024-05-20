@@ -1,0 +1,72 @@
+
+.card-inner{
+    font-weight: 600;
+    width: 200px;
+    padding: 5px 0px;
+    .card-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card-list-todo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+        flex-direction: column;
+        list-style: none;
+        margin-top: 10px;
+
+        li{
+            width: 100%;
+            background-color: #172B4D;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 7px;
+        }
+    }
+
+    .card-addcard{
+        margin-top: 10px;
+        width: 100%;
+
+        :hover{
+            background-color: #52565f;
+            color: white;
+        }
+
+        button{
+            display: flex;
+            padding: 5px 10px;
+            align-items: center;
+            justify-content: center;    
+            width: 100%;
+            border-radius: 7px;
+            border: none;
+        }
+        
+    }
+
+}
+
+.card-add-btn{
+    width: 100%;
+
+    :hover{
+        background-color: #52565f;
+        color: white;
+    }
+
+    button{
+        font-weight: 600;
+        display: flex;
+        padding: 5px 10px;
+        align-items: center;
+        justify-content: center;    
+        width: 100%;
+        border-radius: 7px;
+        border: none;
+    }
+}
